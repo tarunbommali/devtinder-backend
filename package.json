@@ -1,0 +1,23 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "tinder for developers",
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "javascript"
+  ],
+  "license": "ISC",
+  "author": "Tarun Bommali",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
