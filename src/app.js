@@ -1,14 +1,10 @@
- const app = require('express')();
+const app = require("express")();
 
-app.use("/test",(req,res) => {
-   res.send('Hello World');
-})
+app.get("/user", (req, res) => {
+  // Route handler 
+  res.send("route handler 1");
+});
 
-app.use("/",(req,res) => {
-   res.send('from dashboard hello');    })  
-
-
-
- app.listen(3000, () => {
-   console.log('Server is running on port 3000');
- });
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
