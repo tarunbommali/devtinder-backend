@@ -1,34 +1,51 @@
 # 02. Features, HLD, LLD & Planning
 
+This episode covers the basics of software planning, including High-Level Design (HLD), Low-Level Design (LLD), database and API design, project workflow, architecture types, and common design patterns.
+
+---
+
+## Table of Contents
+
+- [HLD (High-Level Design)](#hld-high-level-design)
+- [LLD (Low-Level Design)](#lld-low-level-design)
+- [Real-world Example: DevTinder](#real-world-example-devtinder)
+- [Database Design (MongoDB)](#database-design-mongodb)
+- [API Design (REST APIs)](#api-design-rest-apis)
+- [Project Workflow](#project-workflow)
+- [System Architecture Types](#system-architecture-types)
+- [Design Patterns](#design-patterns)
+- [Summary](#summary)
+
 ---
 
 ## 📌 HLD (High-Level Design)
 
-- **Definition**: HLD is the process of designing the overall structure and architecture of a software system.
-- **Focus**:  
+- **Definition:** Designing the overall structure and architecture of a software system.
+- **Focus:**  
   - Big picture design  
-  - Components interaction  
+  - Component interaction  
   - Technologies, APIs, services  
-- **Goal**: Understand how different modules interact in the system.
+- **Goal:** Understand how different modules interact in the system.
 
 ---
 
 ## 📌 LLD (Low-Level Design)
 
-- **Definition**: LLD is the process of designing the internal logic of individual components or modules.
-- **Focus**:  
+- **Definition:** Designing the internal logic of individual components or modules.
+- **Focus:**  
   - Function definitions  
   - Class diagrams, flowcharts  
   - Database queries, error handling  
-- **Goal**: Provide detailed logic that developers will implement.
+- **Goal:** Provide detailed logic that developers will implement.
 
 ---
 
-## 🔧 Real-world Example (SE2 Project: DevTinder)
+## 🔧 Real-world Example: DevTinder
 
-**Architecture Used**: Microservices  
-- **Frontend**: UI Layer  
-- **Backend**: Node.js + Express.js + MongoDB
+**Architecture Used:** Microservices
+
+- **Frontend:** UI Layer  
+- **Backend:** Node.js + Express.js + MongoDB
 
 ---
 
@@ -52,6 +69,7 @@
 ## 🌐 API Design (REST APIs)
 
 ### 📥 HTTP Methods
+
 - `GET`: Read data  
 - `POST`: Create data  
 - `PUT/PATCH`: Update data  
@@ -76,10 +94,10 @@
 
 ## 🔍 Project Workflow
 
-1. **Requirement Gathering & Analysis**  
-2. **System Design (HLD & LLD)**  
-3. **Database Design**  
-4. **API Design**  
+1. **Requirement Gathering & Analysis**
+2. **System Design (HLD & LLD)**
+3. **Database Design**
+4. **API Design**
 5. **Implementation & Testing**
 
 ---
@@ -96,7 +114,7 @@
 
 ---
 
-## 🎯 Design Patterns (Used in Interviews)
+## 🎯 Design Patterns
 
 | Pattern    | Type         | Description                                                      |
 |------------|--------------|------------------------------------------------------------------|
@@ -106,4 +124,13 @@
 | Strategy   | Behavioral   | Allows switching algorithms at runtime                          |
 
 ---
- 
+
+## Summary
+
+- Understood the difference between HLD and LLD.
+- Explored real-world architecture and database design for DevTinder.
+- Learned about REST API design and common endpoints.
+- Reviewed project workflow and architecture types.
+- Saw common design patterns used in interviews.
+
+---

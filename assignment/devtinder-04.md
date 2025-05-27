@@ -1,30 +1,48 @@
 # 04. Routing and Request Handlers in Express.js
 
-In this episode, we cover Git initialization, setting up routes, testing APIs with Postman, and understanding advanced routing patterns in Express.js.
+This episode covers how to set up Git, create and organize routes in Express.js, test APIs with Postman, and use advanced routing patterns.
 
 ---
 
-## 🗂️ Git Setup
+## Table of Contents
+
+- [Git Setup](#git-setup)
+- [Creating a .gitignore File](#creating-a-gitignore-file)
+- [Pushing Code to GitHub](#pushing-code-to-github)
+- [Defining Routes in Express](#defining-routes-in-express)
+- [HTTP Methods in Express](#http-methods-in-express)
+- [Testing APIs with Postman](#testing-apis-with-postman)
+- [Wildcard & Flexible Routes](#wildcard--flexible-routes)
+- [Advanced Routing Patterns](#advanced-routing-patterns)
+- [Summary](#summary)
+
+---
+
+## Git Setup
+
+Initialize a new Git repository in your project folder:
 
 ```bash
 git init
 ```
 
-- Initialize a new Git repository in your project folder.
+---
 
-### 📁 Create `.gitignore`
+## Creating a .gitignore File
 
-Add the following to `.gitignore` to ignore unnecessary files:
+Add a `.gitignore` file to exclude unnecessary files from your repository:
 
 ```
 node_modules/
 .env
 ```
 
-### ⬆️ Push Code to GitHub
+---
 
-1. Create a new remote repository on GitHub
-2. Run the following commands:
+## Pushing Code to GitHub
+
+1. Create a new repository on GitHub.
+2. Run the following commands to push your code:
 
 ```bash
 git add .
@@ -35,13 +53,14 @@ git push -u origin main
 
 ---
 
-## 🚀 Playing with Routes
+## Defining Routes in Express
 
-In Express.js, routes define how your app responds to client requests.
-
-### Example Routes:
+Routes define how your app responds to client requests.
 
 ```js
+const express = require('express');
+const app = express();
+
 app.get('/xyz', (req, res) => {
   res.send('XYZ GET');
 });
@@ -49,13 +68,17 @@ app.get('/xyz', (req, res) => {
 app.post('/test', (req, res) => {
   res.send('POST to /test');
 });
+
+app.listen(7777, () => {
+  console.log('Server is running on port 7777');
+});
 ```
 
-📝 **Note:** Order of routes matters! Define specific routes before wildcard routes.
+> **Note:** The order of routes matters! Define specific routes before wildcard routes.
 
 ---
 
-## 📬 HTTP Methods in Express
+## HTTP Methods in Express
 
 | Method | Description       |
 |--------|-------------------|
@@ -64,7 +87,7 @@ app.post('/test', (req, res) => {
 | PATCH  | Update partially  |
 | DELETE | Remove data       |
 
-### Example:
+**Example:**
 
 ```js
 app.get('/user', (req, res) => res.send('GET user'));
@@ -75,15 +98,15 @@ app.delete('/user', (req, res) => res.send('DELETE user'));
 
 ---
 
-## 🧪 Test Using Postman
+## Testing APIs with Postman
 
-1. Download and install [Postman](https://www.postman.com/downloads/)
-2. Create a workspace
-3. Test your routes using GET, POST, PATCH, DELETE requests
+1. Download and install [Postman](https://www.postman.com/downloads/).
+2. Create a workspace.
+3. Test your routes using GET, POST, PATCH, and DELETE requests.
 
 ---
 
-## 🌐 Wildcard & Flexible Routes
+## Wildcard & Flexible Routes
 
 ### General Middleware (Wildcard Route)
 
@@ -103,7 +126,7 @@ app.get('/user', (req, res) => {
 
 ---
 
-## 🎯 Advanced Routing Techniques
+## Advanced Routing Patterns
 
 | Pattern            | Matches Example           | Description                                |
 |--------------------|---------------------------|--------------------------------------------|
@@ -116,12 +139,13 @@ app.get('/user', (req, res) => {
 
 ---
 
-## ✅ Summary
+## Summary
 
-- Initialized Git & pushed code to GitHub
-- Learned basic and advanced routing in Express.js
-- Used Postman to test various API methods
-- Explored wildcard and pattern-based routes
+- Initialized Git & pushed code to GitHub.
+- Learned basic and advanced routing in Express.js.
+- Used Postman to test various API methods.
+- Explored wildcard and pattern-based routes.
 
-> 🧠 Routing is core to building APIs — understanding order and pattern matching will save you from big bugs!
-``` 
+> 🧠 **Routing is core to building APIs — understanding order and pattern matching will save you from big bugs!**
+
+---
