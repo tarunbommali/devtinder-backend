@@ -1,6 +1,6 @@
 const mangoose = require('mongoose');
 
-const MONGODB_URL = "mongodb+srv://disistarun:Darling2810@devtinder.gbqus.mongodb.net/devTinderDB?retryWrites=true&w=majority"
+const MONGODB_URL = "mongodb+srv://dbUser:IxZcbu72jy4SSbGh@dev.bfccblb.mongodb.net/?retryWrites=true&w=majority&appName=dev"
 
 const connectDB = async () => {
   try {
