@@ -13,16 +13,24 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         emailId: user.emailId,
-        age: user.age,
         bio: user.bio,
+        age: user.age,
+        gender: user.gender,
         profilePicture: user.profilePicture,
+        highestQualification: user.highestQualification,
+        company: user.company,
+        collegeInstitution: user.collegeInstitution,
+        currentRole: user.currentRole,
+        totalExperience: user.totalExperience,
+        skills: user.skills,
+        location: user.location,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {
     console.error("Failed to fetch profile:", error.message);
-    res
-      .status(500)
-      .json({ message: "Failed to fetch profile", error: error.message });
+    res.status(500).json({ message: "Failed to fetch profile", error: error.message });
   }
 });
 
@@ -32,16 +40,17 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
       return res.status(400).send("Invalid Edit Request");
     }
 
-    const loggedInUser = req.user; // instance of user model
-    console.log(loggedInUser);
+    const user = req.user;
 
     Object.keys(req.body).forEach((key) => {
-      loggedInUser[key] = req.body[key];
+      user[key] = req.body[key];
     });
 
-    await loggedInUser.save();
-    res.send(`${loggedInUser.firstName}, Profile updated Successfully`);
+    await user.save();
+
+    res.send(`${user.firstName}, Profile updated Successfully`);
   } catch (error) {
+    console.error("Error updating profile:", error.message);
     res.status(400).send("ERROR: " + error.message);
   }
 });

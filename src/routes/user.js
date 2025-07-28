@@ -1,10 +1,27 @@
 const express = require("express");
-
+const User = require("../models/user");
 const userRouter = express.Router();
 const userAuth = require("../middlewares/auth").userAuth;
 const ConnectionRequest = require("../models/connectionRequest");
 
 const USER_SAFE_DATA = ["firstName", "lastName", "profilePicture"];
+const USER_FEED_DATA = [
+  "_id",
+  "firstName",
+  "lastName",
+  "emailId",
+  "bio",
+  "age",
+  "gender",
+  "profilePicture",
+  "highestQualification",
+  "company",
+  "collegeInstitution",
+  "currentRole",
+  "totalExperience",
+  "skills",
+  "location",
+];
 
 userRouter.get("/user/requests/received", userAuth, async (req, res) => {
   try {
@@ -57,7 +74,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
 
     const page = parseInt(req.query.page) || 1;
     let limit = parseInt(req.query.limit) || 10;
-    limit = limit > 50 ? 50 : limit; 
+    limit = limit > 50 ? 50 : limit;
     const skip = (page - 1) * limit;
 
     // All connection requests involving the logged in user
@@ -87,7 +104,10 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         { _id: { $nin: Array.from(hideUsersFromFeed) } },
         { _id: { $ne: loggedInUser._id } },
       ],
-    }).select(USER_SAFE_DATA).skip(skip).limit(limit);
+    })
+      .select(USER_FEED_DATA)
+      .skip(skip)
+      .limit(limit);
 
     res.json({
       message: "Feed users fetched successfully",
@@ -98,4 +118,4 @@ userRouter.get("/feed", userAuth, async (req, res) => {
   }
 });
 
-module.exports = userRouter;
+module.exports = userRouter; 

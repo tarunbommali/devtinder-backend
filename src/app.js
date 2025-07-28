@@ -2,21 +2,27 @@ const express = require("express");
 const app = express();
 const connectDB = require("../src/config/database");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 app.use(express.json());
 
-const authRouter = require('../src/routes/auth')
-const profileRouter = require("../src/routes/profile")
-const requestRouter = require("../src/routes/request")
-const userRouter = require("../src/routes/user")
-
+const authRouter = require("../src/routes/auth");
+const profileRouter = require("../src/routes/profile");
+const requestRouter = require("../src/routes/request");
+const userRouter = require("../src/routes/user");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
-app.use("/", userRouter)
-
+app.use("/", userRouter);
 
 // Connect to MongoDB and then start the server
 connectDB()

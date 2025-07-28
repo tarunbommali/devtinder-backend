@@ -1,54 +1,71 @@
+// utils/validation.js
+
+// Signup Validation Function
 const ValidationSignUp = (req) => {
   const { firstName, lastName, emailId, password } = req;
   const errors = {};
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email regex
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-  // First Name Validation
-  if (!firstName.trim()) {
+  // First Name
+  if (!firstName || !firstName.trim()) {
     errors.firstName = "First name is required";
   } else if (firstName.length < 2) {
     errors.firstName = "First name must be at least 2 characters long";
   }
-  // Last Name Validation
-  if (!lastName.trim()) {
+
+  // Last Name
+  if (!lastName || !lastName.trim()) {
     errors.lastName = "Last name is required";
   } else if (lastName.length < 2) {
     errors.lastName = "Last name must be at least 2 characters long";
   }
-  // Email Validation
+
+  // Email
   if (!emailId) {
     errors.emailId = "Email is required";
-  } else if (!regex.test(emailId)) {
+  } else if (!emailRegex.test(emailId)) {
     errors.emailId = "Email is not valid";
   }
-  // Password Validation
+
+  // Password
   if (!password) {
     errors.password = "Password is required";
   } else if (password.length < 8) {
     errors.password = "Password must be at least 8 characters long";
   } else if (!passwordRegex.test(password)) {
     errors.password =
-      "Password must contain at least one letter and one number";
+      "Password must include uppercase, lowercase, number, and special character";
   }
 
   return errors;
 };
 
+// Edit Profile Validation Function
 const ValidateEditProfileData = (req) => {
-  const allowedEditFileds = [
+  const allowedFields = [
     "firstName",
     "lastName",
     "bio",
     "profilePicture",
     "skills",
+    "age",
+    "location",
+    "gender",
+    "company",
+    "collegeInstitution",
+    "highestQualification",
+    "currentRole",
+    "totalExperience",
   ];
 
-  const isAllowedEditFileds = Object.keys(req.body).every((field) =>
-    allowedEditFileds.includes(field)
+  // Only allow updates on these fields
+  const isValid = Object.keys(req.body).every((field) =>
+    allowedFields.includes(field)
   );
 
-  return isAllowedEditFileds;
+  return isValid;
 };
 
-module.exports = { ValidationSignUp , ValidateEditProfileData };
+module.exports = { ValidationSignUp, ValidateEditProfileData };

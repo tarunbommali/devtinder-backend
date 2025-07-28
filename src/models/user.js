@@ -6,18 +6,8 @@ const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      maxlength: 50,
-      minlength: 2,
-    },
-    lastName: {
-      type: String,
-      required: true,
-      maxlength: 50,
-      minlength: 2,
-    },
+    firstName: { type: String, required: true, maxlength: 50, minlength: 2 },
+    lastName: { type: String, required: true, maxlength: 50, minlength: 2 },
     emailId: {
       type: String,
       required: true,
@@ -30,6 +20,7 @@ const userSchema = new mongoose.Schema(
         }
       },
     },
+
     password: {
       type: String,
       required: true,
@@ -48,40 +39,28 @@ const userSchema = new mongoose.Schema(
         }
       },
     },
-    age: {
-      type: Number,
-      min: 0,
-    },
-    bio: {
-      type: String,
-      default: "",
-    },
     gender: {
       type: String,
-      enum: {
-        values:["male", "female", "other" ],
-        message: `{VALUE} is not a valid gender`,
-      }
-      // validate(value) {
-      //   if (!["male", "female", "other"].includes(value)) {
-      //     throw new Error("Gender date is not validated");
-      //   }
-      // },
+      enum: ["male", "female", "other"],
     },
-    skills: {
-      type: [String],
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    age: { type: Number, min: 0, default: 0 },
+    bio: { type: String, default: "", maxlength: 500 },
+    skills: [String],
+    highestQualification: { type: String, default: "" },
+    company: { type: String, default: "" },
+    collegeInstitution: { type: String, default: "" },
+    currentRole: { type: String, default: "" },
+    totalExperience: { type: Number, min: 0, default: 0 },
+    location: {
+      type: String,
+      required: true,
+      trim: true,
     },
   },
   { timestamps: true }
 );
 
-
-
-userSchema.index({ emailId: 1 }, { unique: true });
+// userSchema.index({ emailId: 1 }, { unique: true });
 
 userSchema.methods.getJWT = async function () {
   const user = this;

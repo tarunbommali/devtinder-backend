@@ -5,9 +5,23 @@ const bcrypt = require("bcrypt")
 const { ValidationSignUp } = require("../utils/validation");
 const User = require("../models/user");
 
-
 authRouter.post("/signup", async (req, res) => {
-  const { firstName, lastName, emailId, password, age } = req.body;
+  const {
+    firstName,
+    lastName,
+    emailId,
+    password,
+    age,
+    gender,
+    profilePicture,
+    highestQualification,
+    company,
+    collegeInstitution,
+    currentRole,
+    totalExperience,
+    skills,
+    location, 
+  } = req.body;
 
   try {
     const errors = ValidationSignUp(req.body);
@@ -30,17 +44,28 @@ authRouter.post("/signup", async (req, res) => {
       emailId,
       password: hashedPassword,
       age,
+      gender,
+      profilePicture,
+      highestQualification,
+      company,
+      collegeInstitution,
+      currentRole,
+      totalExperience,
+      skills,
+      location, 
     });
 
     await newUser.save();
-    res
-      .status(201)
-      .json({ message: "User created successfully", user: newUser });
+    res.status(201).json({
+      message: "User created successfully",
+      user: newUser,
+    });
   } catch (error) {
     console.error("Error creating user:", error);
-    res
-      .status(500)
-      .json({ message: "Error creating user", error: error.message });
+    res.status(500).json({
+      message: "Error creating user",
+      error: error.message,
+    });
   }
 });
 
@@ -62,10 +87,10 @@ authRouter.post("/login", async (req, res) => {
 
     const token = await user.getJWT();
 
-    // Store token in cookie
+    // Set token as cookie
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // set to true in production with HTTPS
+      secure: false, // set to true in production
       sameSite: "lax",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
@@ -79,6 +104,17 @@ authRouter.post("/login", async (req, res) => {
         lastName: user.lastName,
         emailId: user.emailId,
         age: user.age,
+        gender: user.gender,
+        profilePicture: user.profilePicture,
+        highestQualification: user.highestQualification,
+        company: user.company,
+        collegeInstitution: user.collegeInstitution,
+        currentRole: user.currentRole,
+        totalExperience: user.totalExperience,
+        skills: user.skills,
+        location: user.location,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {
@@ -88,6 +124,7 @@ authRouter.post("/login", async (req, res) => {
       .json({ message: "Error logging in", error: error.message });
   }
 });
+
 
 authRouter.post('/logout', async (req,res) => {
     res.cookie("token", null, {expires: new Date(Date.now())})
