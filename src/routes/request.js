@@ -75,7 +75,7 @@ requestRouter.post(
           .json({ message: "Invalid status type: " + status });
       }
 
-      const connectionRequest = await ConnectionRequest.findById({
+      const connectionRequest = await ConnectionRequest.findOne({
         _id: requestId,
         toUserId: loggedUser._id,
         status: "interested",

@@ -43,30 +43,43 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
 userRouter.get("/user/connections", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
-    const connectionRequest = await ConnectionRequest.find({
+
+    const connections = await ConnectionRequest.find({
       $or: [
         { fromUserId: loggedInUser._id, status: "accepted" },
         { toUserId: loggedInUser._id, status: "accepted" },
       ],
     })
-      .populate("fromUserId", USER_SAFE_DATA)
-      .populate("toUserId", USER_SAFE_DATA);
+      .populate({
+        path: "fromUserId",
+        select: USER_SAFE_DATA.join(" "),
+      })
+      .populate({
+        path: "toUserId",
+        select: USER_SAFE_DATA.join(" "),
+      });
 
-    const data = connectionRequest.map((row) => {
-      if (row.fromUserId._id.equals(loggedInUser._id)) {
-        return row.toUserId;
-      }
-      return row.fromUserId;
+    // Extract the "other user" from each connection
+    const data = connections.map((conn) => {
+      const from = conn.fromUserId;
+      const to = conn.toUserId;
+
+      // Return the other person, not the logged-in user
+      return from._id.equals(loggedInUser._id) ? to : from;
     });
 
     res.json({
       message: "Connections fetched successfully",
-      data: data,
+      data,
+      connections
     });
   } catch (error) {
-    res.status(400).send("ERROR: " + error.message);
+    console.error("Error fetching connections:", error);
+    res.status(500).send("ERROR: " + error.message);
   }
 });
+
+
 
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
@@ -118,4 +131,4 @@ userRouter.get("/feed", userAuth, async (req, res) => {
   }
 });
 
-module.exports = userRouter; 
+module.exports = userRouter;
