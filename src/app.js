@@ -3,11 +3,10 @@ const app = express();
 const connectDB = require("../src/config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const { ORIGIN_URL } = require("../src/utils/constants");
-
+ 
 app.use(
   cors({
-    origin: ORIGIN_URL, 
+    origin: "https://devtindernetwork.vercel.app/", 
     credentials: true,
   })
 );
