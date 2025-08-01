@@ -4,9 +4,9 @@ const User = require("../models/user");
 const userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
-
+ 
     if (!token) {
-      return res.status(401).json({ message: "Token not found" });
+      return res.status(401).json({ message: "Token not found" + token });
     }
 
     const decodedObj = jwt.verify(token, "Dev@tarun");

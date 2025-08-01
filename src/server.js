@@ -9,7 +9,7 @@ const ORIGIN_URL = ["http://localhost:3000", "http://localhost:5173","https://de
 app.use(
   cors({
     origin: ORIGIN_URL, 
-    secure: false,
+    secure: true,
     sameSite: "none",
     credentials: true,
   })
