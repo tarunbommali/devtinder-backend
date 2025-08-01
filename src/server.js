@@ -10,7 +10,7 @@ app.use(
   cors({
     origin: ORIGIN_URL, 
     secure: false,
-    sameSite: "None",
+    sameSite: "none",
     credentials: true,
   })
 );
